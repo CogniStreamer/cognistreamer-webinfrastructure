@@ -5,12 +5,11 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
-using Cognistreamer.WebInfrastructure.Services;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
 
 // ReSharper disable once CheckNamespace
-namespace Cognistreamer.WebInfrastructure
+namespace Cognistreamer.WebInfrastructure.Services
 {
     /// <summary>
     /// Extension methods for IApplicationBuilder.
