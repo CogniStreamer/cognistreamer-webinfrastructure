@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Autofac;
 using Autofac.Integration.WebApi;
 using Cognistreamer.WebInfrastructure.Services;
 using Cognistreamer.WebInfrastructure.Startup;
