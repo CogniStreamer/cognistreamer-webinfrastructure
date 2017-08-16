@@ -86,8 +86,6 @@
     <Compile Include="Extensions\ApiControllerExtensions.cs" />
     <Compile Include="Extensions\ApplicationBuilderExtensions.cs" />
     <Compile Include="Extensions\AppBuilderExtensions.cs" />
-    <Compile Include="Extractors\IdentityExtractor.cs" />
-    <Compile Include="Extractors\RequestHeaderExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupBase.cs" />
     <Compile Include="Startup\WebApplicationBuilder.cs" />

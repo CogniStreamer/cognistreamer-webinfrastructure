@@ -5,7 +5,6 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Autofac;
 using Autofac.Integration.WebApi;
-using Cognistreamer.WebInfrastructure.Extractors;
 using Cognistreamer.WebInfrastructure.Services;
 using Cognistreamer.WebInfrastructure.Startup;
 using Microsoft.Owin.Cors;
@@ -28,8 +27,6 @@ namespace Cognistreamer.WebInfrastructure
                         .Where(registerApiControllerAssemblyPredicate)
                         .ToArray());
 
-            serviceCollection.Builder.RegisterType<RequestHeaderExtractor>().AsSelf().InstancePerLifetimeScope();
-            serviceCollection.Builder.RegisterType<IdentityExtractor>().AsSelf().InstancePerLifetimeScope();
             ConfigureServices(serviceCollection);
 
             // TODO We'll probably have to map this to /signalr as WebApi uses a different CORS technique (see below)
