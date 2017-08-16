@@ -1,0 +1,75 @@
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using Autofac.Integration.WebApi;
+using Cognistreamer.Cs4.WebInfrastructure.Startup;
+using Cognistreamer.Cs4.WebInfrastructure.Swagger.Filters;
+using Microsoft.Owin.Cors;
+using Newtonsoft.Json.Serialization;
+using Owin;
+using Swashbuckle.Application;
+
+namespace Cognistreamer.Cs4.WebInfrastructure
+{
+    public abstract class StartupBase
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.Builder.RegisterApiControllers(GetApiControllerAssembliesForAutofacRegistration());
+            ConfigureServices(serviceCollection);
+
+            // TODO We'll probably have to map this to /signalr as WebApi uses a different CORS technique (see below)
+            app.UseCors(CorsOptions.AllowAll);
+
+            var applicationBuilder = new ApplicationBuilder(app, serviceCollection);
+            app.UseAutofacMiddleware(applicationBuilder.Services);
+            Configure(applicationBuilder);
+
+            var config = new HttpConfiguration();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+
+#if DEBUG
+            config
+                .EnableSwagger(c =>
+                {
+                    c.SingleApiVersion("v1", "Cognistreamer 4.0 API");
+                    c.BasicAuth("basic").Description("Basic HTTP Authentication");
+                    c.OperationFilter<JsonApiOperationFilter>();
+                    c.IncludeXmlComments(
+<<<<<<< HEAD
+                        HttpContext.Current.Server.MapPath("~/bin/Cognistreamer.Cs4.CloudManager.Api.xml"));
+                    c.OperationFilter<JsonApiOperationFilter>();
+                    c.OperationFilter<JsonApiExamplesOperationFilter>();
+=======
+                        HttpContext.Current.Server.MapPath("~/bin/Cognistreamer.Cs4.CloudManager.Query.Api.xml"));
+>>>>>>> parent of d96018a... CSFOUR-3471: Added SwaggerRequestAttributes and modifications to the Operationfilter, beta version, update for this evening
+                })
+                .EnableSwaggerUi();
+#endif
+
+            applicationBuilder.MapHttpAttributeRoutesForRegisteredApiControllers(config);
+            applicationBuilder.MapRegisteredApiRoutes(config);
+            app.UseAutofacWebApi(config);
+
+            app.UseWebApi(config);
+        }
+
+        protected abstract void ConfigureServices(IServiceCollection services);
+
+        protected abstract void Configure(IApplicationBuilder app);
+
+        private static Assembly[] GetApiControllerAssembliesForAutofacRegistration()
+        {
+            return
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(x => x.FullName.StartsWith("CogniStreamer", StringComparison.OrdinalIgnoreCase))
+                    .ToArray();
+        }
+    }
+}
