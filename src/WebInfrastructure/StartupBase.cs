@@ -15,15 +15,22 @@ namespace Cognistreamer.WebInfrastructure
 {
     public abstract class StartupBase
     {
-        public void Configuration(IAppBuilder app, Func<Assembly, bool> registerApiControllerAssemblyPredicate = null)
+        private readonly Func<Assembly, bool> _registerApiControllerAssemblyPredicate;
+
+        protected StartupBase(Func<Assembly, bool> registerApiControllerAssemblyPredicate = null)
+        {
+            _registerApiControllerAssemblyPredicate = registerApiControllerAssemblyPredicate;
+        }
+
+        public void Configuration(IAppBuilder app)
         {
             var serviceCollection = new ServiceCollection();
 
-            if (registerApiControllerAssemblyPredicate != null)
+            if (_registerApiControllerAssemblyPredicate != null)
                 serviceCollection.Builder.RegisterApiControllers(
                     AppDomain.CurrentDomain
                         .GetAssemblies()
-                        .Where(registerApiControllerAssemblyPredicate)
+                        .Where(_registerApiControllerAssemblyPredicate)
                         .ToArray());
 
             ConfigureServices(serviceCollection);
