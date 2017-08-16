@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/CogniStreamer/cognistreamer-webinfrastructure/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/CogniStreamer/cognistreamer-webinfrastructure</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/CogniStreamer/cognistreamer-webinfrastructure/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>OWIN / WebApi helper classes and extension methods</description>
+    <copyright>Copyright 2017 CogniStreamer</copyright>
+    <dependencies>
+	  <dependency id="Autofac" version="4.6.1" />
+	  <dependency id="Owin" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>

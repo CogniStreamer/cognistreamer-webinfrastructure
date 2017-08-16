@@ -2,10 +2,12 @@
 using System.Threading;
 using Microsoft.Owin;
 using Owin;
+// ReSharper disable UnusedMember.Global
 
+// ReSharper disable once CheckNamespace
 namespace Cognistreamer.WebInfrastructure
 {
-    public static class IAppBuilderExtensions
+    public static class AppBuilderExtensions
     {
         public static IAppBuilder RegisterOnDisposeHandler(this IAppBuilder app, Action onDisposeCallback)
         {

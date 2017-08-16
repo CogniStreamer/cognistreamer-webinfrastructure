@@ -8,6 +8,7 @@ using System.Web.Http.Metadata;
 
 namespace Cognistreamer.WebInfrastructure.Attributes
 {
+    // ReSharper disable once UnusedMember.Global
     public class HeaderParameterBinding<TResult> : HttpParameterBinding
     {
         private readonly string _headerName;
@@ -18,9 +19,8 @@ namespace Cognistreamer.WebInfrastructure.Attributes
             : base(descriptor)
         {
             if (string.IsNullOrWhiteSpace(headerName)) throw new ArgumentNullException(nameof(headerName));
-            if (valueConverter == null) throw new ArgumentNullException(nameof(valueConverter));
             _headerName = headerName;
-            _valueConverter = valueConverter;
+            _valueConverter = valueConverter ?? throw new ArgumentNullException(nameof(valueConverter));
             _getDefaultValue = getDefaultValue ?? (() => default(TResult));
         }
 

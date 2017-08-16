@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Autofac;
+using Cognistreamer.WebInfrastructure.Services;
 using Owin;
 
 namespace Cognistreamer.WebInfrastructure.Startup
 {
-    internal class ApplicationBuilder : IApplicationBuilder
+    internal class WebApplicationBuilder : IWebApplicationBuilder
     {
         private readonly IAppBuilder _owinAppBuilder;
 
-        public ApplicationBuilder(IAppBuilder owinAppBuilder, IServiceCollection serviceCollection, HttpConfiguration httpConfiguration)
+        public WebApplicationBuilder(IAppBuilder owinAppBuilder, IServiceCollection serviceCollection, HttpConfiguration httpConfiguration)
         {
-            if (owinAppBuilder == null) throw new ArgumentNullException(nameof(owinAppBuilder));
-            if (serviceCollection == null) throw new ArgumentNullException(nameof(serviceCollection));
-            if (httpConfiguration == null) throw new ArgumentNullException(nameof(httpConfiguration));
-            _owinAppBuilder = owinAppBuilder;
-            HttpConfiguration = httpConfiguration;
-            Services = serviceCollection.Builder.Build();
+            _owinAppBuilder = owinAppBuilder ?? throw new ArgumentNullException(nameof(owinAppBuilder));
+            HttpConfiguration = httpConfiguration ?? throw new ArgumentNullException(nameof(httpConfiguration));
+            Services = (serviceCollection ?? throw new ArgumentNullException(nameof(serviceCollection))).Builder.Build();
         }
 
         public IContainer Services { get; }

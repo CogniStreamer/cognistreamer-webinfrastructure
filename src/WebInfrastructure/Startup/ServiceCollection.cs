@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Cognistreamer.WebInfrastructure.Services;
 
 namespace Cognistreamer.WebInfrastructure.Startup
 {

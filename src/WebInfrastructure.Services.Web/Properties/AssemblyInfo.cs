@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cognistreamer.WebInfrastructure")]
+[assembly: AssemblyTitle("Cognistreamer.WebInfrastructure.Services.Web")]
 [assembly: AssemblyDescription("This project contains OWIN / WebApi helper classes and extension methods")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CogniStreamer")]
-[assembly: AssemblyProduct("Cognistreamer.WebInfrastructure")]
+[assembly: AssemblyProduct("Cognistreamer.WebInfrastructure.Services.Web")]
 [assembly: AssemblyCopyright("Copyright ©  2017 CogniStreamer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8f9a34fd-73de-4de0-896a-343ec28ea6d7")]
+[assembly: Guid("25e821b3-7193-45f4-a1d0-36137bf98169")]
 
 // Version information for an assembly consists of the following four values:
 //

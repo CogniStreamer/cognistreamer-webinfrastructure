@@ -2,7 +2,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+// ReSharper disable UnusedMember.Global
 
+// ReSharper disable once CheckNamespace
 namespace System.Web.Http
 {
     public static class ApiControllerExtensions

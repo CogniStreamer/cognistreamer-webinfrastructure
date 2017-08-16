@@ -6,19 +6,28 @@ using System.Web.Http.Cors;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Cognistreamer.WebInfrastructure.Extractors;
+using Cognistreamer.WebInfrastructure.Services;
 using Cognistreamer.WebInfrastructure.Startup;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
+// ReSharper disable UnusedMember.Global
 
 namespace Cognistreamer.WebInfrastructure
 {
     public abstract class StartupBase
     {
-        public void Configuration(IAppBuilder app)
+        public void Configuration(IAppBuilder app, Func<Assembly, bool> registerApiControllerAssemblyPredicate = null)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.Builder.RegisterApiControllers(GetApiControllerAssembliesForAutofacRegistration());
+
+            if (registerApiControllerAssemblyPredicate != null)
+                serviceCollection.Builder.RegisterApiControllers(
+                    AppDomain.CurrentDomain
+                        .GetAssemblies()
+                        .Where(registerApiControllerAssemblyPredicate)
+                        .ToArray());
+
             serviceCollection.Builder.RegisterType<RequestHeaderExtractor>().AsSelf().InstancePerLifetimeScope();
             serviceCollection.Builder.RegisterType<IdentityExtractor>().AsSelf().InstancePerLifetimeScope();
             ConfigureServices(serviceCollection);
@@ -27,7 +36,7 @@ namespace Cognistreamer.WebInfrastructure
             app.UseCors(CorsOptions.AllowAll);
 
             var config = new HttpConfiguration();
-            var applicationBuilder = new ApplicationBuilder(app, serviceCollection, config);
+            var applicationBuilder = new WebApplicationBuilder(app, serviceCollection, config);
             app.UseAutofacMiddleware(applicationBuilder.Services);
             Configure(applicationBuilder);
 
@@ -45,14 +54,6 @@ namespace Cognistreamer.WebInfrastructure
 
         protected abstract void ConfigureServices(IServiceCollection services);
 
-        protected abstract void Configure(IApplicationBuilder app);
-
-        private static Assembly[] GetApiControllerAssembliesForAutofacRegistration()
-        {
-            return
-                AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(x => x.FullName.StartsWith("CogniStreamer", StringComparison.OrdinalIgnoreCase))
-                    .ToArray();
-        }
+        protected abstract void Configure(IWebApplicationBuilder app);
     }
 }

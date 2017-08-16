@@ -5,7 +5,11 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
+using Cognistreamer.WebInfrastructure.Services;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
+// ReSharper disable once CheckNamespace
 namespace Cognistreamer.WebInfrastructure
 {
     /// <summary>
@@ -63,6 +67,7 @@ namespace Cognistreamer.WebInfrastructure
         /// Manually register a ApiController route.
         /// </summary>
         /// <param name="app">The ApplicationBuilder.</param>
+        /// <param name="name">The name of the route.</param>
         /// <param name="route">The route.</param>
         public static void RegisterApiControllerRoute(this IApplicationBuilder app, string name, IHttpRoute route)
         {
@@ -109,8 +114,7 @@ namespace Cognistreamer.WebInfrastructure
 
             public FilteredDirectRouteProvider(List<Func<Type, bool>> filters)
             {
-                if (filters == null) throw new ArgumentNullException(nameof(filters));
-                _filters = filters;
+                _filters = filters ?? throw new ArgumentNullException(nameof(filters));
             }
 
             public override IReadOnlyList<RouteEntry> GetDirectRoutes(HttpControllerDescriptor controllerDescriptor, IReadOnlyList<HttpActionDescriptor> actionDescriptors, IInlineConstraintResolver constraintResolver)

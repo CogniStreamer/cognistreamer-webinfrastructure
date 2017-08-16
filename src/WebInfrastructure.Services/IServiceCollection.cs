@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace Cognistreamer.WebInfrastructure
+namespace Cognistreamer.WebInfrastructure.Services
 {
     public interface IServiceCollection
     {

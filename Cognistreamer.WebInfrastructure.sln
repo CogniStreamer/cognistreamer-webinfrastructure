@@ -1,17 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B2EDA9B2-ACD1-4D16-A95B-135694124912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInfrastructure", "src\WebInfrastructure\WebInfrastructure.csproj", "{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInfrastructure.Services", "src\WebInfrastructure.Services\WebInfrastructure.Services.csproj", "{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5ACB3137-CD2C-4DC6-BD24-3806F8ABAB70}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInfrastructure", "src\WebInfrastructure\WebInfrastructure.csproj", "{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInfrastructure.Services.Web", "src\WebInfrastructure.Services.Web\WebInfrastructure.Services.Web.csproj", "{25E821B3-7193-45F4-A1D0-36137BF98169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,11 +27,24 @@ Global
 		{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E821B3-7193-45F4-A1D0-36137BF98169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E821B3-7193-45F4-A1D0-36137BF98169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E821B3-7193-45F4-A1D0-36137BF98169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E821B3-7193-45F4-A1D0-36137BF98169}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B5FC8CAC-FEDB-4D3C-90D5-E5B43758778A} = {B2EDA9B2-ACD1-4D16-A95B-135694124912}
+		{8F9A34FD-73DE-4DE0-896A-343EC28EA6D7} = {B2EDA9B2-ACD1-4D16-A95B-135694124912}
+		{25E821B3-7193-45F4-A1D0-36137BF98169} = {B2EDA9B2-ACD1-4D16-A95B-135694124912}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93BC15AC-D5D0-48D6-8DE9-FF1F4EEB12EF}
 	EndGlobalSection
 EndGlobal
