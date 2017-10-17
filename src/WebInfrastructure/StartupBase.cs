@@ -53,10 +53,14 @@ namespace Cognistreamer.WebInfrastructure
             app.UseAutofacWebApi(config);
 
             app.UseWebApi(config);
+
+            ConfigureFinalMiddleware(app);
         }
 
         protected abstract void ConfigureServices(IServiceCollection services);
 
         protected abstract void Configure(IWebApplicationBuilder app);
+
+        protected virtual void ConfigureFinalMiddleware(IAppBuilder app) { }
     }
 }
