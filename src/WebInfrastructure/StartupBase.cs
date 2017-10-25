@@ -3,7 +3,9 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 using Cognistreamer.WebInfrastructure.Services;
 using Cognistreamer.WebInfrastructure.Startup;
 using Microsoft.Owin.Cors;
@@ -34,6 +36,9 @@ namespace Cognistreamer.WebInfrastructure
                         .ToArray());
 
             ConfigureServices(serviceCollection);
+
+            var mapper = new MapperConfiguration(serviceCollection.MapperConfiguration).CreateMapper();
+            serviceCollection.Builder.RegisterInstance(mapper).As<IMapper>().SingleInstance();
 
             // TODO We'll probably have to map this to /signalr as WebApi uses a different CORS technique (see below)
             app.UseCors(CorsOptions.AllowAll);
