@@ -11,8 +11,8 @@ using Cognistreamer.WebInfrastructure.Startup;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
-// ReSharper disable UnusedMember.Global
 
+// ReSharper disable UnusedMember.Global
 namespace Cognistreamer.WebInfrastructure
 {
     public abstract class StartupBase
@@ -40,15 +40,11 @@ namespace Cognistreamer.WebInfrastructure
             var mapper = new MapperConfiguration(serviceCollection.MapperConfiguration).CreateMapper();
             serviceCollection.Builder.RegisterInstance(mapper).As<IMapper>().SingleInstance();
 
-            // TODO We'll probably have to map this to /signalr as WebApi uses a different CORS technique (see below)
-            app.UseCors(CorsOptions.AllowAll);
-
             var config = new HttpConfiguration();
             var applicationBuilder = new WebApplicationBuilder(app, serviceCollection, config);
             app.UseAutofacMiddleware(applicationBuilder.Services);
             Configure(applicationBuilder);
 
-            config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
